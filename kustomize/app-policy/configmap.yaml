@@ -6,5 +6,4 @@ metadata:
 data:
   registry.example.com: |
     -----BEGIN CERTIFICATE-----
-    ...
     -----END CERTIFICATE-----
