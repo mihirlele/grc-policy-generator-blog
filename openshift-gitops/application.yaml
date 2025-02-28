@@ -10,7 +10,7 @@ spec:
   project: default
   source:
     path: kustomize
-    repoURL: https://github.com/open-cluster-management/grc-policy-generator-blog.git
+    repoURL: https://github.com/mihirlele/grc-policy-generator-blog.git
     targetRevision: main
   syncPolicy:
     automated:
