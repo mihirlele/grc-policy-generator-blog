@@ -17,13 +17,13 @@ spec:
       image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel9:v2.10
       name: policy-generator-install
       volumeMounts:
-      - mountPath: /policy-generator
-        name: policy-generator
+      - mountPath: /.config
+        name: kustomize
     volumeMounts:
     - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
-      name: policy-generator
+      name: kustomize
     volumes:
     - emptyDir: {}
-      name: policy-generator
+      name: kustomize
   kustomizeBuildOptions: --enable-alpha-plugins
 
