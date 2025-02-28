@@ -6,6 +6,8 @@ policyDefaults:
   namespace: acm-policies
   remediationAction: enforce
   severity: medium
+  placement:
+    placementPath: local-placement.yaml
 policies:
   - name: install-compliance-operator
     manifests:
