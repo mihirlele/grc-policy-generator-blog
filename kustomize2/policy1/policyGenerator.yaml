@@ -4,13 +4,8 @@ metadata:
   name: install-compliance-operator
 policyDefaults:
   namespace: acm-policies
-  placement:
-    labelSelector:
-      matchExpressions:
-        - key: vendor
-          operator: In
-          values:
-            - "OpenShift"
+  remediationAction: enforce
+  severity: medium
 policies:
   - name: install-compliance-operator
     manifests:
