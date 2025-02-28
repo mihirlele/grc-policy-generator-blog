@@ -1,35 +1,40 @@
-apiVersion: v1
+apiVersion: v1                    
 kind: Namespace
 metadata:
-  name: policy-generator-blog
+  name: policy-generator-gitops-app                             
 ---
 apiVersion: app.k8s.io/v1beta1
 kind: Application
 metadata:
-  name: policy-generator-blog
-  namespace: policy-generator-blog
+  name: policy-generator-gitops-app
+  namespace: policy-generator-gitops-app
 spec:
   componentKinds:
-    - group: apps.open-cluster-management.io
-      kind: Subscription
+  - group: apps.open-cluster-management.io
+    kind: Subscription
   descriptor: {}
   selector:
     matchExpressions:
       - key: app
         operator: In
-        values:
-          - policy-generator-blog
+        values: 
+          - policy-generator-gitops-app
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ggithubcom-mihirlele-grc-policy-generator-blog-ns
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: Channel
 metadata:
   annotations:
-    apps.open-cluster-management.io/reconcile-rate: high
-  name: policy-generator-blog
-  namespace: policy-generator-blog
+    apps.open-cluster-management.io/reconcile-rate: medium
+  name: ggithubcom-mihirlele-grc-policy-generator-blog
+  namespace: ggithubcom-mihirlele-grc-policy-generator-blog-ns
 spec:
   type: Git
-  pathname: https://github.com/open-cluster-management/grc-policy-generator-blog.git
+  pathname: 'https://github.com/mihirlele/grc-policy-generator-blog'
 ---
 apiVersion: apps.open-cluster-management.io/v1
 kind: Subscription
@@ -39,37 +44,39 @@ metadata:
     apps.open-cluster-management.io/git-path: kustomize
     apps.open-cluster-management.io/reconcile-option: merge
   labels:
-    app: policy-generator-blog
-  name: policy-generator-blog-subscription
-  namespace: policy-generator-blog
+    app: policy-generator-gitops-app
+  name: policy-generator-gitops-app-subscription-1
+  namespace: policy-generator-gitops-app
 spec:
-  allow:
-    - apiVersion: policy.open-cluster-management.io/v1
-      kinds:
-        - "*"
-    - apiVersion: apps.open-cluster-management.io/v1
-      kinds:
-        - PlacementRule
-  channel: policy-generator-blog/policy-generator-blog
+  channel: ggithubcom-mihirlele-grc-policy-generator-blog-ns/ggithubcom-mihirlele-grc-policy-generator-blog
   placement:
     placementRef:
-      kind: PlacementRule
-      name: policy-generator-blog-placement
+      kind: Placement
+      name: policy-generator-gitops-app-placement-1
 ---
-apiVersion: apps.open-cluster-management.io/v1
-kind: PlacementRule
+apiVersion: cluster.open-cluster-management.io/v1beta1
+kind: Placement
 metadata:
   labels:
-    app: policy-generator-blog
-  name: policy-generator-blog-placement
-  namespace: policy-generator-blog
+    app: policy-generator-gitops-app
+  name: policy-generator-gitops-app-placement-1
+  namespace: policy-generator-gitops-app
 spec:
-  clusterConditions:
-    - status: "True"
-      type: ManagedClusterConditionAvailable
-  clusterSelector:
-    matchExpressions:
-      - key: local-cluster
-        operator: In
-        values:
-          - "true"
+  predicates:
+    - requiredClusterSelector:
+        labelSelector:
+          matchExpressions:
+            - key: 'name'
+              operator: 'In'
+              values: 
+                - 'local-cluster'
+  clusterSets:
+    - default
+---
+apiVersion: cluster.open-cluster-management.io/v1beta2
+kind: ManagedClusterSetBinding
+metadata:
+  namespace: policy-generator-gitops-app
+  name: default
+spec:
+  clusterSet: default
