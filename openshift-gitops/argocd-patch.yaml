@@ -5,9 +5,6 @@ metadata:
   namespace: openshift-gitops
 spec:
   repo:
-    env:
-    - name: KUSTOMIZE_PLUGIN_HOME
-      value: /etc/kustomize/plugin
     initContainers:
     - args:
       - -c
@@ -19,9 +16,6 @@ spec:
       volumeMounts:
       - mountPath: /.config
         name: kustomize
-    volumeMounts:
-    - mountPath: /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator
-      name: kustomize
     volumes:
     - emptyDir: {}
       name: kustomize
