@@ -14,4 +14,4 @@ policyDefaults:
 policies:
   - name: install-compliance-operator
     manifests:
-      - path: compliance-operator.yaml
+      - path: compliance-operator
