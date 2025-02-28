@@ -11,11 +11,10 @@ spec:
     initContainers:
     - args:
       - -c
-      - cp /etc/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
-        /policy-generator/PolicyGenerator
+      - mkdir -p /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator && cp /policy-generator/PolicyGenerator-not-fips-compliant /.config/kustomize/plugin/policy.open-cluster-management.io/v1/policygenerator/PolicyGenerator
       command:
       - /bin/bash
-      image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel9@sha256:33115f99e22199cccebbd19353c8f0fdd017d3a9198416b957b70fbec2a704d7
+      image: registry.redhat.io/rhacm2/multicluster-operators-subscription-rhel9:v2.10
       name: policy-generator-install
       volumeMounts:
       - mountPath: /policy-generator
