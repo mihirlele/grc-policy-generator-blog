@@ -23,4 +23,4 @@ policies:
     - setup
   disabled: false
   manifests:
-    - path: input/container-deny-latest-tag
+    - path: input
