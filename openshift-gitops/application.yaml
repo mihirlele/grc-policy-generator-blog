@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: kustomize
+    path: kustomize2
     repoURL: https://github.com/mihirlele/grc-policy-generator-blog.git
     targetRevision: main
   syncPolicy:
