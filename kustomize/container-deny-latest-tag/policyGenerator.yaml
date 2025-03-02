@@ -11,6 +11,8 @@ policyDefaults:
   controls: 
     - CM-2 Baseline Configuration
   namespace: acm-policies
+  placement:
+    placementPath: spoke-nonlocal-placement.yaml
   remediationAction: enforce
   severity: medium
   standards:
