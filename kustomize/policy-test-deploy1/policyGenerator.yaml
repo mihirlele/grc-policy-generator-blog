@@ -3,12 +3,12 @@ kind: PolicyGenerator
 metadata:
   name: policy-generator-blog
 policyDefaults:
-  namespace: policy-generator-blog
+  namespace: acm-policies
   remediationAction: enforce
   severity: medium
   placement:
     placementPath: local-placement.yaml
 policies:
-  - name: policy-generator-blog-app
+  - name: policy-test-deploy1
     manifests:
       - path: app-policy
