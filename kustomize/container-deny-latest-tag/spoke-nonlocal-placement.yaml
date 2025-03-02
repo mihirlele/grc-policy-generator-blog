@@ -2,8 +2,8 @@ apiVersion: cluster.open-cluster-management.io/v1beta1
 kind: Placement
 metadata:
   labels:
-    app: local-placement
-  name: local-placement-1
+    app: spoke-placement
+  name: spoke-placement-1
   namespace: acm-policies
 spec:
   predicates:
