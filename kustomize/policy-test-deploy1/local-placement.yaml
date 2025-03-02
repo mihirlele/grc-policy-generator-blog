@@ -4,7 +4,7 @@ metadata:
   labels:
     app: local-placement
   name: local-placement-1
-  namespace: policy-generator-blog
+  namespace: acm-policies
 spec:
   predicates:
     - requiredClusterSelector:
