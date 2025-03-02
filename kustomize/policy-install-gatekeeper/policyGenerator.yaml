@@ -1,0 +1,14 @@
+apiVersion: policy.open-cluster-management.io/v1
+kind: PolicyGenerator
+metadata:
+  name: install-gatekeeper-operator
+policyDefaults:
+  namespace: acm-policies
+  remediationAction: enforce
+  severity: medium
+  placement:
+    placementPath: spoke-nonlocal-placement.yaml
+policies:
+  - name: install-gatekeeper-operator
+    manifests:
+      - path: gatekeer-operator
